@@ -1,30 +1,43 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Serilog;
+using UdaStore.Client.Core;
+using UdaStore.Client.Core.Extensions;
+using UdaStore.Client.Persistence;
 
 namespace UdaStore.Client
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
+        private readonly IHostingEnvironment _hostingEnvironment;
+        private readonly IConfiguration _configuration;
 
-        public IConfiguration Configuration { get; }
+        public Startup(IConfiguration configuration, IHostingEnvironment env)
+        {
+            _configuration = configuration;
+            _hostingEnvironment = env;
+        }
+        
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IUdaStoreDbContext, UdaStoreDbContext>();
+            services.AddDbContext<UdaStoreDbContext>(options =>
+            options.UseSqlServer(_configuration.GetConnectionString("UdaStoreDatabase"),
+                paging => paging.UseRowNumberForPaging()));
+
+            services.AddCustomizedAuthentication(_configuration);
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            return services.Build(_configuration, _hostingEnvironment);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,6 +71,7 @@ namespace UdaStore.Client
             }
 
             app.UseStaticFiles();
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {

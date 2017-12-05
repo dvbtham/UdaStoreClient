@@ -1,6 +1,13 @@
-﻿@{
+﻿@using UdaStore.Client.Core.Helpers;
+@model UdaStore.Client.Core.ViewModels.HomeViewModel
+@{
     ViewData["Title"] = "Trang chủ";
 }
+
+@await Html.PartialAsync("_WidgetInstances", Model.WidgetInstances.Where(x => x.WidgetZoneId == WidgetZoneIdsHelper.HomeFeatured))
+@Html.Partial("_Services")
+@Html.Partial("_ProductSummary")
+
 <div class="content-page">
     <div class="container">
         <!-- featured category fashion -->
@@ -514,3 +521,4 @@
     </div>
 </div>
 
+@Html.Partial("_BrandShowCase")

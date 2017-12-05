@@ -1,0 +1,25 @@
+﻿@model UdaStore.Client.Core.ViewModels.CarouselWidgetViewComponentViewModel
+<div id="home-slider">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3 slider-left"></div>
+            <div class="col-sm-9 header-top-right">
+                <div class="homeslider">
+                    <div class="content-slide">
+                        <ul id="contenhomeslider">
+                            @foreach (var item in Model.Items)
+                            {
+                                <li><img alt="@item.Image" style="width: 100%; height: 450px" src="@item.Image" title="@item.Caption" /></li>
+                            }
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="header-banner banner-opacity">
+                    <a href="#"><img alt="Funky roots" src="~/assets/data/ads1.jpg" /></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END Home slideder-->

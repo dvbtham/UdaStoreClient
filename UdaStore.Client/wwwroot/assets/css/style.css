@@ -2461,6 +2461,7 @@ span.notify-right{
 }
 .trademark-product .product-item{
     margin-top: 30px;
+    display: inline-table;
 }
 .trademark-product .image-product{
     float: left;

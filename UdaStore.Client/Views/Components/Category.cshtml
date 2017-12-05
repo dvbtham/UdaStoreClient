@@ -1,0 +1,60 @@
+﻿@model IEnumerable<UdaStore.Client.Core.ViewModels.CategoryMenuItem>
+
+<div id="nav-top-menu" class="nav-top-menu ">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3" id="box-vertical-megamenus">
+                <div class="box-vertical-megamenus">
+                    <h4 class="title">
+                        <span class="title-menu">Danh mục</span>
+                        <span class="btn-open-mobile pull-right home-page"><i class="fa fa-bars"></i></span>
+                    </h4>
+                    <div class="vertical-menu-content is-home">
+                        <ul class="vertical-menu-list">
+                            @foreach (var item in Model)
+                            {
+                                if (item.ChildItems.Any())
+                                {
+                                    <li>
+                                        <a class="parent" href="#">@item.Name</a>
+                                        <div class="vertical-dropdown-menu">
+                                            <div class="vertical-groups col-sm-12">
+                                                <div class="mega-group col-sm-4">
+                                                    <ul class="group-link-default">
+                                                        @foreach (var child in item.ChildItems)
+                                                        {
+                                                            <li><a href="/@child.SeoTitle">@child.Name</a></li>
+                                                        }
+                                                       
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li><a href="/@item.SeoTitle"><img class="icon-menu" alt="Funky roots" src="~/assets/data/1.png">@item.Name</a></li>
+                                }
+                                
+                            }
+                        </ul>
+                        <div class="all-category"><span class="open-cate">Tất cả danh mục</span></div>
+                    </div>
+                </div>
+            </div>
+            @Html.Partial("_Menu")
+        </div>
+        <!-- userinfo on top-->
+        <div id="form-search-opntop">
+        </div>
+        <!-- userinfo on top-->
+        <div id="user-info-opntop">
+        </div>
+        <!-- CART ICON ON MMENU -->
+        <div id="shopping-cart-box-ontop">
+            <i class="fa fa-shopping-cart"></i>
+            <div class="shopping-cart-box-ontop-content"></div>
+        </div>
+    </div>
+</div>

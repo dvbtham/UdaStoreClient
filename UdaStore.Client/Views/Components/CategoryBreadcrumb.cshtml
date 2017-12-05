@@ -1,0 +1,8 @@
+﻿@using UdaStore.Client.Core.ViewModels
+@model IEnumerable<BreadcrumbViewModel>
+
+    @foreach (var item in Model)
+    {
+        <a href="/@item.Url" title="@item.Text">@item.Text</a>
+        <span class="navigation-pipe">&nbsp;</span>
+    }

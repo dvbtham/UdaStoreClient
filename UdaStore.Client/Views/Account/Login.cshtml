@@ -1,0 +1,53 @@
+﻿@model UdaStore.Client.Core.ViewModels.LoginViewModel
+@{
+    ViewData["Title"] = "Đăng nhập";
+}
+
+<div class="columns-container">
+    <div class="container" id="columns">
+        <!-- breadcrumb -->
+        <div class="breadcrumb clearfix">
+            <a class="home" href="/" title="Return to Home">Trang chhủ</a>
+            <span class="navigation-pipe">&nbsp;</span>
+            <span class="navigation_page">@ViewData["Title"]</span>
+        </div>
+        <!-- ./breadcrumb -->
+        <!-- page heading-->
+        <h2 class="page-heading">
+            <span class="page-heading-title2">@ViewData["Title"]</span>
+        </h2>
+        <!-- ../page heading-->
+        <div class="page-content">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="box-authentication">
+                        <h3>Tạo mới tài khoản</h3>
+                        <p>Vui lòng nhập email của bạn.</p>
+                        <label for="emmail_register">Email address</label>
+                        <input id="emmail_register" type="text" class="form-control">
+                        <button class="button"><i class="fa fa-user"></i> Tạo tài khoản</button>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <form asp-action="Login">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="box-authentication">
+                            <h3>Bạn đã có tài khoản?</h3>
+                            <label >Email</label>
+                            <input asp-for="Email" type="text" class="form-control">
+                            <span asp-validation-for="Email" class="text-danger" style="display: block"></span>
+                            <label>Mật khẩu</label>
+                            <input asp-for="Password" type="password" class="form-control">
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                            <p class="forgot-pass">
+                                <a href="#">Quên mật khẩu?</a>
+                            </p>
+                            <button class="button"><i class="fa fa-lock"></i> Đăng nhập</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

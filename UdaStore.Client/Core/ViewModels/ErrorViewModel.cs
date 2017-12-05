@@ -1,6 +1,4 @@
-using System;
-
-namespace UdaStore.Client.Models
+namespace UdaStore.Client.Core.ViewModels
 {
     public class ErrorViewModel
     {
